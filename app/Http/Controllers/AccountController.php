@@ -10,11 +10,21 @@ class AccountController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('viewAny', Account::class);
 
-        return response()->json(Account::query()->paginate(25));
+        $user = $request->user();
+        $query = Account::query();
+
+        if ($user && ($user->isReseller() || $user->isClient())) {
+            $query->where(function ($builder) use ($user) {
+                $builder->where('id', $user->account_id)
+                    ->orWhere('reseller_account_id', $user->account_id);
+            });
+        }
+
+        return response()->json($query->paginate(25));
     }
 
     public function store(Request $request)

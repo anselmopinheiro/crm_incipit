@@ -10,13 +10,21 @@ class DomainServiceController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('viewAny', DomainService::class);
 
-        return response()->json(
-            DomainService::query()->with(['account', 'tld'])->paginate(25)
-        );
+        $user = $request->user();
+        $query = DomainService::query()->with(['account', 'tld']);
+
+        if ($user && ($user->isReseller() || $user->isClient())) {
+            $query->whereHas('account', function ($builder) use ($user) {
+                $builder->where('id', $user->account_id)
+                    ->orWhere('reseller_account_id', $user->account_id);
+            });
+        }
+
+        return response()->json($query->paginate(25));
     }
 
     public function store(Request $request)

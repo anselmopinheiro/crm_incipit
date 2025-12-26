@@ -10,13 +10,21 @@ class HostingServiceController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('viewAny', HostingService::class);
 
-        return response()->json(
-            HostingService::query()->with(['account', 'plan'])->paginate(25)
-        );
+        $user = $request->user();
+        $query = HostingService::query()->with(['account', 'plan']);
+
+        if ($user && ($user->isReseller() || $user->isClient())) {
+            $query->whereHas('account', function ($builder) use ($user) {
+                $builder->where('id', $user->account_id)
+                    ->orWhere('reseller_account_id', $user->account_id);
+            });
+        }
+
+        return response()->json($query->paginate(25));
     }
 
     public function store(Request $request)

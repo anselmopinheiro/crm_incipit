@@ -16,7 +16,7 @@ class HostingServicePolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->isManager();
+        return $user->isManager() || $user->isReseller() || $user->isClient();
     }
 
     public function view(User $user, HostingService $service): bool

@@ -16,7 +16,7 @@ class AccountPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->isManager();
+        return $user->isManager() || $user->isReseller() || $user->isClient();
     }
 
     public function view(User $user, Account $account): bool
