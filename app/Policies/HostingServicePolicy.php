@@ -14,6 +14,11 @@ class HostingServicePolicy
     use RespectsRoles;
     use AccountScoped;
 
+    public function viewAny(User $user): bool
+    {
+        return $user->isManager();
+    }
+
     public function view(User $user, HostingService $service): bool
     {
         if ($user->isManager()) {
@@ -29,6 +34,11 @@ class HostingServicePolicy
     }
 
     public function update(User $user, HostingService $service): bool
+    {
+        return $user->isManager();
+    }
+
+    public function delete(User $user, HostingService $service): bool
     {
         return $user->isManager();
     }

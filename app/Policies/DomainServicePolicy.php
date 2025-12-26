@@ -14,6 +14,11 @@ class DomainServicePolicy
     use RespectsRoles;
     use AccountScoped;
 
+    public function viewAny(User $user): bool
+    {
+        return $user->isManager();
+    }
+
     public function view(User $user, DomainService $service): bool
     {
         if ($user->isManager()) {
@@ -29,6 +34,11 @@ class DomainServicePolicy
     }
 
     public function update(User $user, DomainService $service): bool
+    {
+        return $user->isManager();
+    }
+
+    public function delete(User $user, DomainService $service): bool
     {
         return $user->isManager();
     }
