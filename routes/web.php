@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RenewalResponseController;
+use App\Http\Livewire\Accounts\Show as AccountShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/accounts/{account}', AccountShow::class)->name('accounts.show');
+
+Route::get('/renewals/{token}', [RenewalResponseController::class, 'show'])->name('renewals.respond');
+Route::post('/renewals/{token}', [RenewalResponseController::class, 'respond'])->name('renewals.respond.submit');

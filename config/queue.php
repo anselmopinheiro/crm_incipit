@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    'default' => env('QUEUE_CONNECTION', 'uuid-database'),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,6 +36,14 @@ return [
 
         'database' => [
             'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'default',
+            'retry_after' => 90,
+            'after_commit' => false,
+        ],
+
+        'uuid-database' => [
+            'driver' => 'uuid-database',
             'table' => 'jobs',
             'queue' => 'default',
             'retry_after' => 90,
