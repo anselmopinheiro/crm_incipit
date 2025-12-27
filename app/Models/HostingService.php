@@ -30,6 +30,11 @@ class HostingService extends Model
         'cancellation_confirmed_at' => 'datetime',
     ];
 
+    protected $attributes = [
+        'cancellation_requested_at' => null,
+        'cancellation_confirmed_at' => null,
+    ];
+
     public function account(): BelongsTo
     {
         return $this->belongsTo(Account::class);

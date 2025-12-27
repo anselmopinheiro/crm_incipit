@@ -10,8 +10,13 @@
 <body class="bg-gray-100 text-gray-900">
     <div class="min-h-screen">
         <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div class="font-semibold text-lg">CRM Interno</div>
+                <nav class="flex flex-wrap gap-3 text-sm text-gray-600">
+                    <a href="{{ route('crm.accounts.index') }}" class="hover:text-gray-900">Clientes</a>
+                    <a href="{{ route('crm.hosting.index') }}" class="hover:text-gray-900">Alojamento</a>
+                    <a href="{{ route('crm.domains.index') }}" class="hover:text-gray-900">Domínios</a>
+                </nav>
                 <div class="text-sm text-gray-500">Gestão de serviços recorrentes</div>
             </div>
         </header>
