@@ -1,9 +1,7 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-semibold">Domínios</h1>
-        @can('create', \App\Models\DomainService::class)
-            <a href="{{ route('crm.domains.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Novo domínio</a>
-        @endcan
+        <a href="{{ route('crm.domains.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Novo domínio</a>
     </div>
 
     <div class="bg-white shadow rounded-lg overflow-hidden">
@@ -24,10 +22,9 @@
                         <td class="px-4 py-3">{{ $service->domain_name }}</td>
                         <td class="px-4 py-3">{{ $service->renewal_date->format('Y-m-d') }}</td>
                         <td class="px-4 py-3">{{ ucfirst($service->status) }}</td>
-                        <td class="px-4 py-3 text-right">
-                            @can('update', $service)
-                                <a href="{{ route('crm.domains.edit', $service) }}" class="text-sm text-gray-700">Editar</a>
-                            @endcan
+                        <td class="px-4 py-3 text-right space-x-3">
+                            <a href="{{ route('crm.domains.edit', $service) }}" class="text-sm text-gray-700">Editar</a>
+                            <button type="button" wire:click="delete('{{ $service->id }}')" class="text-sm text-red-600">Remover</button>
                         </td>
                     </tr>
                 @empty

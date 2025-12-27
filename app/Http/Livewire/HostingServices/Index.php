@@ -12,6 +12,19 @@ class Index extends Component
     use AuthorizesRequests;
     use WithPagination;
 
+    public function delete(string $serviceId)
+    {
+        $service = HostingService::query()->findOrFail($serviceId);
+
+        if (auth()->user()) {
+            $this->authorize('delete', $service);
+        }
+
+        $service->delete();
+
+        $this->resetPage();
+    }
+
     public function render()
     {
         if (auth()->user()) {
