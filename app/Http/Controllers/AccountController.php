@@ -12,10 +12,12 @@ class AccountController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorize('viewAny', Account::class);
-
         $user = $request->user();
         $query = Account::query();
+
+        if ($user) {
+            $this->authorize('viewAny', Account::class);
+        }
 
         if ($user && ($user->isReseller() || $user->isClient())) {
             $query->where(function ($builder) use ($user) {
@@ -49,7 +51,9 @@ class AccountController extends Controller
 
     public function show(Account $account)
     {
-        $this->authorize('view', $account);
+        if (request()->user()) {
+            $this->authorize('view', $account);
+        }
 
         return response()->json($account);
     }

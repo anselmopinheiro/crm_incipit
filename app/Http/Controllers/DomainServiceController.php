@@ -12,10 +12,12 @@ class DomainServiceController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorize('viewAny', DomainService::class);
-
         $user = $request->user();
         $query = DomainService::query()->with(['account', 'tld']);
+
+        if ($user) {
+            $this->authorize('viewAny', DomainService::class);
+        }
 
         if ($user && ($user->isReseller() || $user->isClient())) {
             $query->whereHas('account', function ($builder) use ($user) {
@@ -50,7 +52,9 @@ class DomainServiceController extends Controller
 
     public function show(DomainService $domainService)
     {
-        $this->authorize('view', $domainService);
+        if (request()->user()) {
+            $this->authorize('view', $domainService);
+        }
 
         return response()->json($domainService->load(['account', 'tld', 'serviceTerms']));
     }

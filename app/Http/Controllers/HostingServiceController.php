@@ -12,10 +12,12 @@ class HostingServiceController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorize('viewAny', HostingService::class);
-
         $user = $request->user();
         $query = HostingService::query()->with(['account', 'plan']);
+
+        if ($user) {
+            $this->authorize('viewAny', HostingService::class);
+        }
 
         if ($user && ($user->isReseller() || $user->isClient())) {
             $query->whereHas('account', function ($builder) use ($user) {
@@ -50,7 +52,9 @@ class HostingServiceController extends Controller
 
     public function show(HostingService $hostingService)
     {
-        $this->authorize('view', $hostingService);
+        if (request()->user()) {
+            $this->authorize('view', $hostingService);
+        }
 
         return response()->json($hostingService->load(['account', 'plan', 'serviceTerms']));
     }
