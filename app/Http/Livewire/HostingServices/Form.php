@@ -77,7 +77,7 @@ class Form extends Component
             $this->service = HostingService::query()->create($data);
         }
 
-        return redirect()->route('crm.hosting.index');
+        return redirect()->route('hosting-services.index');
     }
 
     public function render()

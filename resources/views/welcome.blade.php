@@ -14,9 +14,9 @@
                 <p class="text-sm text-gray-600">Gestão de serviços recorrentes com Livewire.</p>
             </div>
             <div class="grid gap-3 text-sm">
-                <a href="{{ route('crm.accounts.index') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Clientes</a>
-                <a href="{{ route('crm.hosting.index') }}" class="px-4 py-2 bg-gray-900 text-white rounded-md">Alojamento</a>
-                <a href="{{ route('crm.domains.index') }}" class="px-4 py-2 bg-gray-900 text-white rounded-md">Domínios</a>
+                <a href="{{ route('accounts.index') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Clientes</a>
+                <a href="{{ route('hosting-services.index') }}" class="px-4 py-2 bg-gray-900 text-white rounded-md">Alojamento</a>
+                <a href="{{ route('domain-services.index') }}" class="px-4 py-2 bg-gray-900 text-white rounded-md">Domínios</a>
             </div>
             <p class="text-xs text-gray-500">Use estas ligações para gerir os registos.</p>
         </div>

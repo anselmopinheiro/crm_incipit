@@ -1,7 +1,7 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-semibold">Clientes</h1>
-        <a href="{{ route('crm.accounts.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Novo cliente</a>
+        <a href="{{ route('accounts.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Novo cliente</a>
     </div>
 
     <div class="bg-white shadow rounded-lg overflow-hidden">
@@ -23,7 +23,7 @@
                         <td class="px-4 py-3">{{ $account->email_billing ?? '—' }}</td>
                         <td class="px-4 py-3">{{ ucfirst($account->status) }}</td>
                         <td class="px-4 py-3 text-right space-x-3">
-                            <a href="{{ route('crm.accounts.edit', $account) }}" class="text-sm text-gray-700">Editar</a>
+                            <a href="{{ route('accounts.edit', $account) }}" class="text-sm text-gray-700">Editar</a>
                             <button type="button" wire:click="delete('{{ $account->id }}')" class="text-sm text-red-600">Remover</button>
                         </td>
                     </tr>

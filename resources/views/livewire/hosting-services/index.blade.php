@@ -1,7 +1,7 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-semibold">Alojamento</h1>
-        <a href="{{ route('crm.hosting.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Novo serviço</a>
+        <a href="{{ route('hosting-services.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md">Novo serviço</a>
     </div>
 
     <div class="bg-white shadow rounded-lg overflow-hidden">
@@ -23,7 +23,7 @@
                         <td class="px-4 py-3">{{ $service->renewal_date->format('Y-m-d') }}</td>
                         <td class="px-4 py-3">{{ ucfirst($service->status) }}</td>
                         <td class="px-4 py-3 text-right space-x-3">
-                            <a href="{{ route('crm.hosting.edit', $service) }}" class="text-sm text-gray-700">Editar</a>
+                            <a href="{{ route('hosting-services.edit', $service) }}" class="text-sm text-gray-700">Editar</a>
                             <button type="button" wire:click="delete('{{ $service->id }}')" class="text-sm text-red-600">Remover</button>
                         </td>
                     </tr>

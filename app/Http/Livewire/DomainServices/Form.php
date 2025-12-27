@@ -77,7 +77,7 @@ class Form extends Component
             $this->service = DomainService::query()->create($data);
         }
 
-        return redirect()->route('crm.domains.index');
+        return redirect()->route('domain-services.index');
     }
 
     public function render()

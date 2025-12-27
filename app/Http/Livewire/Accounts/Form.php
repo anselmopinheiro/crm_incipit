@@ -72,7 +72,7 @@ class Form extends Component
             $this->account = Account::query()->create($data);
         }
 
-        return redirect()->route('crm.accounts.index');
+        return redirect()->route('accounts.index');
     }
 
     public function render()

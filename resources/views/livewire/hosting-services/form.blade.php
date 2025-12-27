@@ -1,7 +1,7 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-semibold">{{ $service->exists ? 'Editar alojamento' : 'Novo alojamento' }}</h1>
-        <a href="{{ route('crm.hosting.index') }}" class="text-sm text-gray-600">Voltar</a>
+        <a href="{{ route('hosting-services.index') }}" class="text-sm text-gray-600">Voltar</a>
     </div>
 
     <form wire:submit.prevent="save" class="bg-white shadow rounded-lg p-6 space-y-4">
